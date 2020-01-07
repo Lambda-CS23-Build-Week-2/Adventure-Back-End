@@ -1,9 +1,21 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('directions', t => {
+    return knex.schema.createTable('rooms', t => {
+      t.increments();
+      t.integer('room_id')
+        .notNullable()
+        .unique()
+      t.string('type', 255)
+    })
+    .createTable('directions', t => {
           t.increments()
           t.integer('room_id')
             .notNullable()
+            .unsigned()
+            .references('room_id')
+            .inTable('rooms')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE')
           t.integer('north')
             .defaultTo(-2)
           t.integer('south')
@@ -12,24 +24,10 @@ exports.up = function(knex) {
             .defaultTo(-2)
           t.integer('west')
             .defaultTo(-2)
-      })
-        .createTable('rooms', t => {
-          t.increments();
-          t.integer('room_id')
-            .notNullable()
-            .unique()
-          t.string('type', 255)
-          t.integer('exits')
-            .notNullable()
-            .unsigned()
-            .references('id')
-            .inTable('directions')
-            .onDelete('CASCADE')
-            .onUpdate('CASCADE')
-        })
+      })       
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('directions')
-  .dropTableIfExists('rooms');
+  return knex.schema.dropTableIfExists('rooms')
+  .dropTableIfExists('directions');
 };
