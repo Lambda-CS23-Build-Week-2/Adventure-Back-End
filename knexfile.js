@@ -1,5 +1,4 @@
 // Update with your config settings.
-// postgres://localhost:5432/postgres?user=dhamano&password=password
 const localPg = {
     host: 'localhost',
     port: '5432',
