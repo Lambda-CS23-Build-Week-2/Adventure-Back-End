@@ -13,6 +13,7 @@ exports.up = function(knex) {
           .inTable('directions')
           .onDelete('CASCADE')
           .onUpdate('CASCADE')
+      })
         .createTable('directions', t => {
           t.increments()
           t.integer('room_id')
@@ -26,7 +27,6 @@ exports.up = function(knex) {
           t.integer('west')
             .defaultTo(-2)
         })
-    })
 };
 
 exports.down = function(knex) {
