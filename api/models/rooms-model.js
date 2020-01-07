@@ -37,7 +37,8 @@ async function addRoom(room_info) {
         await db('rooms')
             .insert({
                 room_id: room_info.room_id,
-                type: room_info.type
+                type: room_info.type,
+                title: room_info.title
             })
             console.log('rooms')
         await db('directions')
