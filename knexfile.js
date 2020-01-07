@@ -31,10 +31,10 @@ const localPg = {
       client: 'pg',
       connection: productionDbConnection, // could be obj or str
       migrations: {
-        directory: './data/migrations'
+        directory: './db/migrations'
       },
       seeds: {
-        directory: './data/seeds'
+        directory: './db/seeds'
       },
     }
   

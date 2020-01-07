@@ -12,4 +12,4 @@ server.get('/', (req, res) => {
     res.status(200).send('<h2>5x5</h2>');
 });
 
-modules.exports = server;
+module.exports = server;
