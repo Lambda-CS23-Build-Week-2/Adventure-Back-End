@@ -1,10 +1,11 @@
 // Update with your config settings.
-
+// postgres://localhost:5432/postgres?user=dhamano&password=password
 const localPg = {
     host: 'localhost',
-    database: 'blah',
-    user: 'blah',
-    password: 'blah'
+    port: '5432',
+    database: 'postgres',
+    user: 'dhamano',
+    password: 'password'
   }
   const productionDbConnection = process.env.DATABASE_URL || localPg;
   
@@ -17,14 +18,8 @@ const localPg = {
             directory: './db/migrations'
         },
         seeds: {
-            directory: './db/seeds/dev'
-        },
-        useNullAsDefault: true,
-      pool: {
-        afterCreate: (conn, done) => {
-          conn.run('PRAGMA foreign_keys = ON', done);
+            directory: './db/seeds'
         }
-      }
     },
   
     production: {
