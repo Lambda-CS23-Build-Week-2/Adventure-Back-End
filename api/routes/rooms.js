@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     try {
         const rooms = await Rooms.getAllRooms();
         let newRooms = await rooms.map( (item, i) => {
-            let newArr = {"room_id": item.room_id, "type": item.type}
+            let newArr = {"room_id": item.room_id, "title": item.title, "type": item.type}
             let dir = {
                 "north": item.north,
                 "south": item.south,
