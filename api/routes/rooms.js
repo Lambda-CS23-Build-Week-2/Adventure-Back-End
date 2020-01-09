@@ -8,7 +8,15 @@ router.get('/', async (req, res) => {
     try {
         const rooms = await Rooms.getAllRooms();
         let newRooms = await rooms.map( (item, i) => {
-            let newArr = {"room_id": item.room_id, "title": item.title, "type": item.type}
+            let newArr = {
+                "room_id": item.room_id, 
+                "title": item.title, 
+                "type": item.type,
+                "description": item.description,
+                "coordinates": item.coordinates,
+                "terrain": item.terrain,
+                "elevation": item.elevation,
+            }
             let dir = {
                 "north": item.north,
                 "south": item.south,
@@ -85,6 +93,7 @@ router.post('/directions/update', async (req, res) => {
 });
 
 router.post('/update', async (req, res) => {
+    console.log(req.body, "request body")
     try {
         const room = await Rooms.updateRoom(req.body)
         console.log(room, "<-- room")
