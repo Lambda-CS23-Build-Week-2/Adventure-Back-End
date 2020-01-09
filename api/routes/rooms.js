@@ -87,6 +87,7 @@ router.post('/directions/update', async (req, res) => {
 router.post('/update', async (req, res) => {
     try {
         const room = await Rooms.updateRoom(req.body)
+        console.log(room, "<-- room")
         res.status(204).json({})
     }
     catch (err) {
