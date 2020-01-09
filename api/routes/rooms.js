@@ -84,4 +84,14 @@ router.post('/directions/update', async (req, res) => {
     }
 });
 
+router.post('/update', async (req, res) => {
+    try {
+        const room = await Rooms.updateRoom(req.body)
+        res.status(204).json({})
+    }
+    catch (err) {
+        res.status(500).json({ message: "Error updating direction."})
+    }
+});
+
 module.exports = router;

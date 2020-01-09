@@ -5,7 +5,8 @@ module.exports = {
     getDirections,
     addRoom,
     getRoomByID,
-    updateDirection
+    updateDirection,
+    updateRoom
 }
 
 async function getAllRooms() {
@@ -31,16 +32,24 @@ async function updateDirection(room_info) {
             .update({ [room_info.direction]: room_info.dir_room_id })
 }
 
+async function updateRoom(room_info) {
+    return await db('rooms AS r')
+            .where({ room_id: room_info.room_id })
+            .update(room_info)
+}
+
 async function addRoom(room_info) {
     try {
-        console.log('try', room_info)
         await db('rooms')
             .insert({
                 room_id: room_info.room_id,
                 type: room_info.type,
-                title: room_info.title
+                title: room_info.title,
+                description: room_info.description,
+                coordinates: room_info.coordinates,
+                terrain: room_info.terrain,
+                elevation: room_info.elevation
             })
-            console.log('rooms')
         await db('directions')
             .insert({
                 room_id: room_info.room_id,
@@ -49,7 +58,6 @@ async function addRoom(room_info) {
                 east: room_info.east,
                 west: room_info.west
             })
-            console.log('directions')
         return true
     }
     catch (err) {
